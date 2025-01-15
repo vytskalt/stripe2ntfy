@@ -18,11 +18,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		w.Write([]byte("Hello World!"))
-	})
+	mux := http.NewServeMux()
 
-	http.HandleFunc("/webhook", func(w http.ResponseWriter, req *http.Request) {
+	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		const MaxBodyBytes = int64(65536)
 		req.Body = http.MaxBytesReader(w, req.Body, MaxBodyBytes)
 		payload, err := io.ReadAll(req.Body)
@@ -51,8 +49,8 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 	})
 
-	fmt.Println("Listening on :8000")
-	err := http.ListenAndServe(":8000", nil)
+	fmt.Println("Listening on :3000")
+	err := http.ListenAndServe(":3000", mux)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to listen on port 8000: %v\n", err)
 		os.Exit(1)
