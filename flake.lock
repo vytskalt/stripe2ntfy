@@ -24,16 +24,31 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1710154385,
-        "narHash": "sha256-4c3zQ2YY4BZOufaBJB4v9VBBeN2dH7iVdoJw8SDNCfI=",
+        "lastModified": 1733668782,
+        "narHash": "sha256-tPsqU00FhgdFr0JiQUiBMgPVbl1jbPCY5gbFiJycL3I=",
         "owner": "nix-community",
         "repo": "gomod2nix",
-        "rev": "872b63ddd28f318489c929d25f1f0a3c6039c971",
+        "rev": "514283ec89c39ad0079ff2f3b1437404e4cba608",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "gomod2nix",
+        "type": "github"
+      }
+    },
+    "mkshell-minimal": {
+      "locked": {
+        "lastModified": 1700988624,
+        "narHash": "sha256-KJyiF67zVYOBkNltKhJATfSj+gfRFX9dSFIWDEBy2nQ=",
+        "owner": "viperML",
+        "repo": "mkshell-minimal",
+        "rev": "6b0868be06da900b5fe6ece05616b84e3cbd7944",
+        "type": "github"
+      },
+      "original": {
+        "owner": "viperML",
+        "repo": "mkshell-minimal",
         "type": "github"
       }
     },
@@ -55,11 +70,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1732014248,
-        "narHash": "sha256-y/MEyuJ5oBWrWAic/14LaIr/u5E0wRVzyYsouYY3W6w=",
+        "lastModified": 1737632463,
+        "narHash": "sha256-38J9QfeGSej341ouwzqf77WIHAScihAKCt8PQJ+NH28=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
+        "rev": "0aa475546ed21629c4f5bbf90e38c846a99ec9e9",
         "type": "github"
       },
       "original": {
@@ -72,6 +87,7 @@
     "root": {
       "inputs": {
         "gomod2nix": "gomod2nix",
+        "mkshell-minimal": "mkshell-minimal",
         "nixpkgs": "nixpkgs_2"
       }
     },

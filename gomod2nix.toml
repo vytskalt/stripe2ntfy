@@ -1,6 +1,6 @@
 schema = 3
 
 [mod]
-  [mod."github.com/stripe/stripe-go/v81"]
-    version = "v81.1.0"
-    hash = "sha256-U3atOoxoqXxBjsPsOzDnZKTZUMaO1b+DFlctnmM+Yu0="
+  [mod."github.com/stripe/stripe-go/v79"]
+    version = "v79.12.0"
+    hash = "sha256-ulOXI7G6nl4Pw7R2AsvOQPpWP+nArH+eIA8rhOQ9dSM="

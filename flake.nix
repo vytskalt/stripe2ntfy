@@ -2,9 +2,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     gomod2nix.url = "github:nix-community/gomod2nix";
+    mkshell-minimal.url = "github:viperML/mkshell-minimal";
   };
 
-  outputs = { nixpkgs, gomod2nix, ... }: let
+  outputs = { nixpkgs, gomod2nix, mkshell-minimal, ... }: let
     forAllSystems = function:
       nixpkgs.lib.genAttrs [
         "x86_64-linux"
@@ -36,37 +37,52 @@
         remove-references-to -t ${pkgs.iana-etc} $out/bin/stripe2ntfy
       '';
     };
-
-    createImage = suffix: package: pkgs: pkgs.dockerTools.buildLayeredImage {
-      name = "ghcr.io/vytskalt/stripe2ntfy${suffix}";
-      tag = package.version;
-      config = {
-        Cmd = [ "${package}/bin/stripe2ntfy" ];
-        Env = [
-          "GIT_SSL_CAINFO=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-          "SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-        ];
-        ExposedPorts = {
-          "8000/tcp" = {};
-        };
-      };
-    };
   in {
     packages = forAllSystems (pkgs: let
       pkgsAarch64 = pkgs.pkgsCross.aarch64-multiplatform;
     in rec {
       package = createPackage pkgs;
-      image = createImage "" package pkgs;
+      image = pkgs.dockerTools.buildLayeredImage {
+        name = "ghcr.io/vytskalt/stripe2ntfy";
+        tag = package.version;
+        config = {
+          Cmd = [ "${package}/bin/stripe2ntfy" ];
+          Env = [
+            "GIT_SSL_CAINFO=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+            "SSL_CERT_FILE=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+          ];
+          ExposedPorts = {
+            "8000/tcp" = {};
+          };
+        };
+      };
 
       package-aarch64 = createPackage pkgsAarch64;
-      image-aarch64 = createImage "-aarch64" package-aarch64 pkgsAarch64;
+      image-aarch64 = pkgs.dockerTools.buildLayeredImage {
+        name = "ghcr.io/vytskalt/stripe2ntfy-aarch64";
+        tag = package-aarch64.version;
+        architecture = "arm64";
+        config = {
+          Cmd = [ "${package-aarch64}/bin/stripe2ntfy" ];
+          Env = [
+            "GIT_SSL_CAINFO=${pkgsAarch64.cacert}/etc/ssl/certs/ca-bundle.crt"
+            "SSL_CERT_FILE=${pkgsAarch64.cacert}/etc/ssl/certs/ca-bundle.crt"
+          ];
+          ExposedPorts = {
+            "8000/tcp" = {};
+          };
+        };
+      };
     });
 
-    devShells = forAllSystems (pkgs: {
-      default = pkgs.mkShell {
+    devShells = forAllSystems (pkgs: let
+      mkShell = mkshell-minimal pkgs;
+    in {
+      default = mkShell {
         buildInputs = [
           pkgs.go
           pkgs.gomod2nix
+          pkgs.stripe-cli
         ];
       };
     });

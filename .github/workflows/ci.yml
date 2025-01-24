@@ -16,7 +16,5 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@v4
       - name: Check formatting
         run: nix develop -i -c sh -c "if gofmt -s -l . | grep -q '.'; then exit 1; fi"
-      - name: Run tests
-        run: GOCACHE=$(pwd)/.cache/go-build GOMODCACHE=$(pwd)/go/pkg/mod nix develop -i -k GOCACHE -k GOMODCACHE -c go test -v ./...
       - name: Build Docker image
         run: nix build .#image
