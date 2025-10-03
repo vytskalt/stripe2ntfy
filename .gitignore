@@ -11,3 +11,8 @@
 go.work
 result
 core
+
+stripe2ntfy
+
+.idea
+.vscode

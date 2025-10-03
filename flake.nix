@@ -22,7 +22,7 @@
 
     createPackage = pkgs: pkgs.buildGoApplication {
       pname = "stripe2ntfy";
-      version = "0.1.0";
+      version = "0.2.0";
       pwd = ./.;
       src = ./.;
       modules = ./gomod2nix.toml;
