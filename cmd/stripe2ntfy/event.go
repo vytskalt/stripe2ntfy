@@ -121,7 +121,7 @@ func createNotification(eventType stripe.EventType, eventData json.RawMessage) e
 		}
 
 		return eventNotification{
-			title:    "😥 Subscription canceled",
+			title:    "😥 Subscription Canceled",
 			body:     body,
 			clickURL: clickURL,
 		}
