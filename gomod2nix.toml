@@ -5,8 +5,8 @@ schema = 3
     version = "v79.12.0"
     hash = "sha256-ulOXI7G6nl4Pw7R2AsvOQPpWP+nArH+eIA8rhOQ9dSM="
   [mod."golang.org/x/net"]
-    version = "v0.23.0"
-    hash = "sha256-ZB4504rtgsHbcRfijjlqt4/2ddb8tyQB5IBn126uVTQ="
+    version = "v0.38.0"
+    hash = "sha256-iHmyxkZQLw1PsUZaXHMt84GrjbXPvkEc92sLoK3W++c="
   [mod."gopkg.in/yaml.v3"]
-    version = "v3.0.0"
-    hash = "sha256-XWfvIV7+KXlZV4sBZd0srGeuQonS9cTYptCc6NcgVvc="
+    version = "v3.0.1"
+    hash = "sha256-FqL9TKYJ0XkNwJFnq9j0VvJ5ZUU1RvH/52h/f5bkYAU="
