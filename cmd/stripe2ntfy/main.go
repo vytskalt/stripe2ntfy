@@ -104,6 +104,7 @@ func sendNotification(config ntfyConfig, liveMode bool, notification eventNotifi
 		req.Header.Set("Authorization", fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(auth))))
 	}
 
+	req.Header.Set("Markdown", "yes")
 	req.Header.Set("Title", notification.title)
 	req.Header.Set("Icon", "https://play-lh.googleusercontent.com/2PS6w7uBztfuMys5fgodNkTwTOE6bLVB2cJYbu5GHlARAK36FzO5bUfMDP9cEJk__cE")
 	if notification.clickURL != "" {
